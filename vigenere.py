@@ -18,10 +18,12 @@ def encrypt(text, rot):
 
 
 def main():
+    from sys import argv
     text = input("Type a message:\n")
-    rotation = input("Rotate by:\n")
-
+    #rotation = input("Rotate by:\n")
+    rotation = argv[1]
     print(encrypt(text, rotation))
+
 
 if __name__ == "__main__":
     main()
