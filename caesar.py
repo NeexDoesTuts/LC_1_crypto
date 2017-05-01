@@ -8,9 +8,13 @@ def encrypt(text, rot):
 
 
 def main():
+    from sys import argv
+    #print("This is what the user typed on the command line:", argv)
     text = input("Type a message:\n")
-    rotation = int(input("Rotate by:\n"))
+    #rotation = int(input("Rotate by:\n"))
+    rotation = int(argv[1])
     print(encrypt(text, rotation))
+
 
 if __name__ == "__main__":
     main()
