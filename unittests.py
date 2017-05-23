@@ -36,7 +36,26 @@ class TestCrypto(unittest.TestCase):
         # self.assertEqual(helpers.rotate_character("", 27), "") FAILS !
         self.assertEqual(helpers.rotate_character(" ", 27), " ")
 
+    def test_caesar_encrypt_char(self):
+        self.assertEqual(caesar.encrypt("a", 13), "n")
+        self.assertEqual(caesar.encrypt("a", 130), "a")
+        self.assertEqual(caesar.encrypt("A", 130), "A")
+        self.assertEqual(caesar.encrypt("z", 13), "m")
+        self.assertEqual(caesar.encrypt("x", 13), "k")
+        self.assertEqual(caesar.encrypt("!", 13), "!")
+        self.assertEqual(caesar.encrypt("", 13), "")
+
+    def test_caesar_encrypt_word(self): 
+        self.assertEqual(caesar.encrypt("aaaa", 13), "nnnn")
+        self.assertEqual(caesar.encrypt("LaunchCode", 13), "YnhapuPbqr")
+        self.assertEqual(caesar.encrypt("LaunchCode", 1), "MbvodiDpef")
+
+    def test_caesar_encrypt_sentence(self):
+        self.assertEqual(caesar.encrypt("Hello, World!", 5), "Mjqqt, Btwqi!")
+        self.assertEqual(caesar.encrypt("hello, World!", 0), "hello, World!")
         
+
+
 if __name__ == '__main__':
     unittest.main()
 
