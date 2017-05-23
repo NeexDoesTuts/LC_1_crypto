@@ -33,7 +33,7 @@ class TestCrypto(unittest.TestCase):
         self.assertEqual(helpers.rotate_character("x", 13), "k")
         self.assertEqual(helpers.rotate_character("g", 10), "q")
         self.assertEqual(helpers.rotate_character("!", 27), "!")
-        # self.assertEqual(helpers.rotate_character("", 27), "") FAILS !
+        # self.assertEqual(helpers.rotate_character("", 27), "") ERROR !
         self.assertEqual(helpers.rotate_character(" ", 27), " ")
 
     def test_caesar_encrypt_char(self):
@@ -54,6 +54,32 @@ class TestCrypto(unittest.TestCase):
         self.assertEqual(caesar.encrypt("Hello, World!", 5), "Mjqqt, Btwqi!")
         self.assertEqual(caesar.encrypt("hello, World!", 0), "hello, World!")
         
+    def test_vigenere_encrypt_char(self):
+        # self.assertEqual(vigenere.encrypt("a", ""), "") ERROR
+        # self.assertEqual(vigenere.encrypt("a", " "), "") ERROR
+        self.assertEqual(vigenere.encrypt("a", "a"), "a")
+        self.assertEqual(vigenere.encrypt("a", "aababa"), "a")
+        # self.assertEqual(vigenere.encrypt("", "aababa"), "a") #ERROR
+        
+    def test_vigenere_encrypt_word(self):
+        self.assertEqual(vigenere.encrypt("Hello", "a"), "Hello")
+        self.assertEqual(vigenere.encrypt("Hello", "b"), "Ifmmp")
+        self.assertEqual(vigenere.encrypt("Hello", "xxyybbddii"), "Ebjjp")
+        self.assertEqual(vigenere.encrypt("!", ""), "!") # it will skip rot, and run
+        self.assertEqual(vigenere.encrypt(" ", ""), " ") # it will skip rot, and run
+        self.assertEqual(vigenere.encrypt("@", ""), "@") # it will skip rot, and run
+        self.assertEqual(vigenere.encrypt("!", " "), "!") # it will skip rot, and run
+        self.assertEqual(vigenere.encrypt("%", "whatever"), "%") # it will skip rot, and run
+
+    def test_vigenere_encrypt_sentence(self):
+        self.assertEqual(vigenere.encrypt("Hello LaunchCode", "a"), "Hello LaunchCode")
+        self.assertEqual(vigenere.encrypt("Hello", "b"), "Ifmmp")
+        self.assertEqual(vigenere.encrypt("Hello", "xxyybbddii"), "Ebjjp")
+        self.assertEqual(vigenere.encrypt("!", ""), "!")
+        self.assertEqual(vigenere.encrypt(" ", ""), " ")
+        self.assertEqual(vigenere.encrypt("@", ""), "@")
+        self.assertEqual(vigenere.encrypt("!", " "), "!") # it will skip key, and should run
+        self.assertEqual(vigenere.encrypt("%", "whatever"), "%")
 
 
 if __name__ == '__main__':
